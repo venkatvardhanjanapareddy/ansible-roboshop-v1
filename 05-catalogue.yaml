@@ -64,7 +64,7 @@
     - name: enable and start catalogue
       service:
         name: catalogue
-        state: start
+        state: started
         enabled: yes
 
     - name: copy mongo repo file
