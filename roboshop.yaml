@@ -27,6 +27,7 @@
 
     - name: Update route53 records
       amazon.aws.route53:
+        zone: "{{ domain_name }}"
         record: "{{ item.item}}.{{ domain_name }}"
         state: present
         type: A
