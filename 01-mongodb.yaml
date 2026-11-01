@@ -11,12 +11,12 @@
       package:
         name: mongodb-org
         state: present
-        enabled: true
 
     - name: start mongodb
       service:
         name: mongod
         state: started
+        enabled: true
 
     - name: change localhost access to everyone
       lineinfile:
