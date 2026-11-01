@@ -15,3 +15,15 @@
         path: /etc/redis/redis.conf
         regexp: "127.0.0.1"
         replace: "0.0.0.0"
+
+    - name: change protected mode yes to no
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: "protected-mode yes"
+        line: "protected-mode no"
+
+    - name: starte and enable redis
+      service:
+        name: redis
+        state: started
+        enabled: yes
