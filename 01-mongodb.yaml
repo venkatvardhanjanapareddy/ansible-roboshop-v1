@@ -5,7 +5,7 @@
     - name: copy mongo repo to /etc/yum.repos.d/mongo.repo
       copy:
         src: mongo.repo
-        dest: /etc/yum.repos.d/mongo.
+        dest: /etc/yum.repos.d/mongo.repo
 
     - name: install mongo-org
       package:
