@@ -1,5 +1,6 @@
 - name: setting up mongodb server
   hosts: mongodb
+  beccome: yes
   tasks:
     - name: copy mongo repo to /etc/yum.repos.d/mongo.repo
       copy:
