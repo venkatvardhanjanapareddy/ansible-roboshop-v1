@@ -45,3 +45,42 @@
       unarchive:
         src: /tmp/catalogue.zip
         dest: /app
+        remote_src: yes
+
+    - name: install dependencies
+      community.general.npm:
+        path: /app
+
+    - name: copy service file
+      template:
+        src: catalogue.service.j2 # jinja2
+        dest: /etc/systemd/system/catalogue.service
+
+    - name: daemon reload catalogue
+      systemd_service:
+        name: catalogue
+        state: started
+
+    - name: enable and start catalogue
+      service:
+        name: catalogue
+        state: start
+        enabled: yes
+
+    - name: copy mongo repo file
+      copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
+
+    - name: install mongodb client
+      dnf:
+        name: mongodb-mongosh
+        state: present
+
+    - name: check if products data exists
+      command: mongosh --host "{{ mongodb_host }}" --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()'
+      register: product_count
+
+    - name: see the products count
+      debug:
+        msg: "{{ product_count }}"
