@@ -15,6 +15,6 @@
 
     - name: change localhost access to all
       replace:
-        src: /etc/redis/redis.conf
+        path: /etc/redis/redis.conf
         regexp: "127.0.0.1"
         replace: "0.0.0.0"
