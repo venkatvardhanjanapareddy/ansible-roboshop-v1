@@ -20,7 +20,7 @@
         state: started
         enabled: yes
 
-    - name: check if user exists
+    - name: create rabbitmq user and password
       community.rabbitmq.rabbitmq_user:
         user: roboshop
         password: roboshop123
