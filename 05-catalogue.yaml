@@ -84,3 +84,18 @@
     - name: see the products count
       debug:
         msg: "{{ product_count }}"
+
+    - name: load products
+      shell: mongosh --host "{{ mongodb_host }}" </app/db/master-data.js
+      when: product_count.stdout | int == 0
+
+    - name: daemon reload catalogue
+      systemd_service:
+        name: catalogue
+        state: started
+
+    - name: enable and start catalogue
+      service:
+        name: catalogue
+        state: started
+        enabled: yes
