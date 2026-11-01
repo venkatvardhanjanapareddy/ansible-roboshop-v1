@@ -2,9 +2,6 @@
   hosts: redis
   become: yes
   tasks:
-    - name: disbale redis
-      command: dnf module disable redis -y
-
     - name: enable redis:7
       command: dnf module enable redis:7 -y
 
