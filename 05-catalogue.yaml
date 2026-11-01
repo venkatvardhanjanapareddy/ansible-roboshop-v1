@@ -2,7 +2,7 @@
   hosts: local
   become: yes
   tasks:
-    - name: diable nodejs
+    - name: disable default nodejs
       command: dnf module disable nodejs -y
     - name: enable nodejs24
       command: dnf module enable nodejs:24 -y
@@ -20,3 +20,28 @@
         home: /app
         comment: roboshop system user
         system: true
+
+    - name: delete the /app dir - deleting old code
+      file:
+        path: /app
+        state: absent
+
+    - name: remove catalogue.zip
+      file:
+        path: /tmp/catalogue.zip
+        state: absent
+
+    - name: create /app dir
+      file:
+        path: /app
+        state: directory # if not file will be created
+
+    - name: download app zip
+      get_url:
+        url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
+        dest: /tmp/catalogue.zip
+
+    - name: unzip catalogue app
+      unarchive:
+        src: /tmp/catalogue.zip
+        dest: /app
