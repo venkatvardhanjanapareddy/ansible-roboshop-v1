@@ -1,4 +1,4 @@
-- name: setting up mongodb server
+- name: configure mongodb server
   hosts: mongodb
   become: yes
   tasks:
