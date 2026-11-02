@@ -80,6 +80,7 @@
     - name: check if products data exists
       command: mongosh --host "{{ mongodb_host }}" --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()'
       register: product_count
+      ignore_errors: true
 
     - name: see the products count
       debug:
