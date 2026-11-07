@@ -12,3 +12,4 @@ user_host: user.vardhandaws.online
 rabbitmq_host: rabbitmq.vardhandaws.online
 rabbitmq_user: roboshop
 rabbitmq_user_password: roboshop123
+payment_host: payment.vardhandaws.online
