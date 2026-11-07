@@ -37,6 +37,18 @@
       loop: "{{ ec2_output.results }}"
       when: event == "create"
 
+    - name: Update route53 records for frontend
+      amazon.aws.route53:
+        zone: "{{ domain_name }}"
+        record: "{{ domain_name }}"
+        state: present
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].public_ip_address }}"
+        overwrite: true
+      loop: "{{ ec2_output.results }}"
+      when: event == "create" and item.item == "frontend"
+
     - name: delete route53 record
       amazon.aws.route53:
         zone: "{{ domain_name }}"
@@ -46,6 +58,16 @@
         type: A
       loop: "{{ ec2_output.results }}"
       when: event == "delete"
+
+    - name: delete route53 record
+      amazon.aws.route53:
+        zone: "{{ domain_name }}"
+        record: "{{ domain_name }}"
+        state: absent
+        ttl: 1
+        type: A
+      loop: "{{ ec2_output.results }}"
+      when: event == "delete" and item.item == "frontend"
 
     - name: delete ec2 instance
       amazon.aws.ec2_instance:
