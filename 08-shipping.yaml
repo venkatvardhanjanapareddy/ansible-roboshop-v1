@@ -47,3 +47,13 @@
         src: /tmp/shipping.zip
         dest: /app
         remote_src: yes
+
+    - name: check mvn version without JAVA_HOME
+      command: mvn -v
+      args:
+        chdir: /app
+      register: mvn-version
+
+    - name: print the version
+      debug:
+        msg: "{{ mvn-version}}"
