@@ -15,6 +15,7 @@
         name: nginx
         state: started
         enabled: yes
+      ignore_errors: true
 
     - name: remove /usr/share/nginx/html/
       file:
