@@ -79,7 +79,7 @@
         msg: "{{ cities_count }}"
 
     - name: load citties data to mysql
-      command: mysql -h "{{mysql_host}}" -uroot -p{{mysql_root_password}} < /app/db/master-data.sql
+      command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/master-data.sql
       when: cities_count.rc != 0 or cities_count.stdout | int == 0
 
     - name: create app user in mysql
