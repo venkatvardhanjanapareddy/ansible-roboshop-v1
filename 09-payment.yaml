@@ -43,6 +43,7 @@
       unarchive:
         src: /tmp/payment.zip
         dest: /app
+        remote_src: yes
 
     - name: install python dependencies in virtual env
       ansible.builtin.pip:
