@@ -11,6 +11,7 @@
           - maven
           - java-25-openjdk-devel
           - maven-openjdk25 # installing this package so no need to set the JAVA_HOME
+          - mysql
 
     - name: add system user
       user:
@@ -56,4 +57,18 @@
 
     - name: print the version
       debug:
-        msg: "{{ mvn_version}}"
+        msg: "{{ mvn_version.stdout_lines}}"
+
+    - name: build shipping
+      command: mvn clean package
+      args:
+        chdir: /app
+
+    - name: move shipping.jar
+      command: mv target/shipping.jar shipping.jar # reason for moving is if any user runs mvn clean then the file is target folder will be lost
+      args:
+        chdir: /app
+
+    - name: check citites data exist
+      command: mysql -h "{{ mysql_host }}" -u root -p{{ mysql_root_password }} -N -B -e "SELECT COUNT(*) FROM cities.cities;"
+      register: cities_count

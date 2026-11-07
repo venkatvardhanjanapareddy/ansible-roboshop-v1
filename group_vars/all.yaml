@@ -3,3 +3,5 @@ ansible_password: DevOps321
 mongodb_host: mongodb.vardhandaws.online
 redis_host: redis.vardhandaws.online
 catalogue_host: catalogue.vardhandaws.online
+mysql_host: mysql.vardhandaws.online
+mysql_root_password: RoboShop@1
