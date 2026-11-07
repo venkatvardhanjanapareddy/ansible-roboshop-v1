@@ -22,7 +22,27 @@
         system: true
         state: present
 
+    - name: Delete old /app
+      file:
+        path: /app
+        state: absent
+
+    - name: delete zip file
+      file:
+        path: /tmp/shipping.zip
+        state: absent
+
     - name: Create /app dir
       file:
         path: /app
         state: directory
+
+    - name: download zip
+      get_url:
+        url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-v4.zip
+        dest: /tmp/shipping.zip
+
+    - name: unzip the files
+      unarchive:
+        src: /tmp/shipping.zip
+        dest: /app
