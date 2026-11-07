@@ -11,7 +11,7 @@
         state: present
 
     - name: add system cart
-      cart:
+      user:
         name: roboshop
         comment: roboshop system cart
         shell: /sbin/nologin
