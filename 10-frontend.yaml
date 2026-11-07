@@ -44,7 +44,7 @@
 
     - name: copy roboshop.conf
       template:
-        src: roboshop.conf
+        src: roboshop.conf.j2
         dest: /etc/nginx/default.d/roboshop.conf
 
     - name: restart nginx
