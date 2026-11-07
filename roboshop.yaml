@@ -66,8 +66,7 @@
         state: absent
         ttl: 1
         type: A
-      loop: "{{ ec2_output.results }}"
-      when: event == "delete" and item.item == "frontend"
+      when: event == "delete"
 
     - name: delete ec2 instance
       amazon.aws.ec2_instance:
