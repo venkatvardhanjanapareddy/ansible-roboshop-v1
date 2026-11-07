@@ -31,7 +31,6 @@
       file:
         path: /tmp/shipping.zip
         state: absent
-        remote_src: yes
 
     - name: Create /app dir
       file:
@@ -47,3 +46,4 @@
       unarchive:
         src: /tmp/shipping.zip
         dest: /app
+        remote_src: yes
