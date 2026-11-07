@@ -1,0 +1,28 @@
+- name: configure shipping service
+  hosts: shipping
+  become: yes
+  tasks:
+    - name: enable maven:3.9
+      command: dnf module enable maven:3.9 -y
+
+    - name: install java25 and maven
+      dnf:
+        name:
+          - maven
+          - java-25-openjdk-devel
+          - maven-openjdk25 # installing this package so no need to set the JAVA_HOME
+
+    - name: add system user
+      user:
+        name: roboshop
+        comment: roboshop system user
+        shell: /sbin/nologin
+        create_home: false
+        home: /app
+        system: true
+        state: present
+
+    - name: Create /app dir
+      file:
+        path: /app
+        state: directory
